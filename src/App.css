@@ -1,0 +1,66 @@
+#root {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #00aeff;
+  border-radius: 5px;
+  min-height: 250px;
+}
+form{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  margin: 10;
+  margin-top: 20px;
+  text-align: center;
+}
+input{
+  width: 80%;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+button{
+  padding: 5px;
+  background-color: greenyellow;
+  border-radius: 5px;
+  border-width: 0;
+}
+button:hover{
+  cursor: pointer;
+  border-width: 1px;
+  border-color: white;
+}
+.tasksbox{
+  display: flex;
+}
+.tasksbox>div{
+  width: 49%;
+  margin: 5px
+}
+.tasksbox:first-child{
+  margin-left: 10px;
+}
+li{
+  list-style: none;
+}
+.remove-btn{
+  background-color: rgba(255, 0, 0, 0.801);
+}
+
+
+li>button{
+  border-radius: 5px;
+  margin-left: 10px;
+  background-color: silver;
+}
+li{
+  background-color: lightblue;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px
+}
+.head{
+  font-size: medium;
+}
