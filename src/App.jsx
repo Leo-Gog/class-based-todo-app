@@ -1,16 +1,9 @@
 import "./App.css";
 import { Component } from "react";
-
 import Form from "./components/toDoForm";
 import List from "./components/toDoList";
-function removItem(arr, value){
-  const index = arr.findIndex(
-    (el)=> el.id === value.id
-  )
-  arr.splice(index, 1)
-}
-export default class App extends Component {
-  
+
+export default class App extends Component {  
   state = {
     tasksInProgress: [
       {
@@ -20,7 +13,7 @@ export default class App extends Component {
       }
     ],
     doneTasks: []
-  };
+  }
 
   addTodo = (e) => {
     e.preventDefault()
@@ -37,8 +30,7 @@ export default class App extends Component {
   removeTodo = (e) => {
     e.preventDefault()
     const {doneTasks} = this.state
-    const arr = [...doneTasks]
-    removItem(arr, e.target.parentElement)
+    const arr = doneTasks.filter((el)=> el.id !== e.target.parentElement.id)
     this.setState({
       doneTasks: arr,
     })
@@ -49,27 +41,24 @@ export default class App extends Component {
     let id = e.target.parentElement.id
     let status = e.target.parentElement.getAttribute('data-status')
     
+    function moveTask(arr, id){
+      let done = arr.find((value) => value.id === id)
+      done.status = !done.status
+      const tasks = arr.filter((x)=>x !== done)
+      return [tasks, done]
+    }
+
     if(status ==='true'){
-      const currentTodos = this.state.tasksInProgress
-      let index = currentTodos.findIndex((value) => value.id === id)
-      const done = currentTodos[index]
-      done.status = false
-      const newTodos = [...currentTodos]
-      newTodos.splice(index,1)
+      const [tasks, done] = moveTask(this.state.tasksInProgress,id)
       this.setState({
-      tasksInProgress: newTodos,
+      tasksInProgress: tasks,
       doneTasks: [...this.state.doneTasks, done]
       })
     }else{
-      const doneTodos = this.state.doneTasks
-      let index = doneTodos.findIndex((value) => value.id === id)
-      const returnedTask = doneTodos[index]
-      returnedTask.status = true
-      const newTodos = [...doneTodos]
-      newTodos.splice(index,1)
+      const [newDoneTasks, returnedTask] = moveTask(this.state.doneTasks,id)
       this.setState({
       tasksInProgress: [...this.state.tasksInProgress, returnedTask],
-      doneTasks: newTodos
+      doneTasks: newDoneTasks
       })
     }
   }
