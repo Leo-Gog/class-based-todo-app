@@ -12,7 +12,5 @@ export default function List({arr, func, removeBtn, name="მიმდინა�
             })}
         </ul>
     </div>
-        
-       
     )
 }

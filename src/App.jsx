@@ -48,10 +48,8 @@ export default class App extends Component {
     e.preventDefault()
     let id = e.target.parentElement.id
     let status = e.target.parentElement.getAttribute('data-status')
-    console.log(id)
     
     if(status ==='true'){
-      console.log('working')
       const currentTodos = this.state.tasksInProgress
       let index = currentTodos.findIndex((value) => value.id === id)
       const done = currentTodos[index]
@@ -70,11 +68,10 @@ export default class App extends Component {
       const newTodos = [...doneTodos]
       newTodos.splice(index,1)
       this.setState({
-      doneTasks: newTodos,
-      tasksInProgress: [...this.state.tasksInProgress, returnedTask]
+      tasksInProgress: [...this.state.tasksInProgress, returnedTask],
+      doneTasks: newTodos
       })
     }
-
   }
   render() {
     const remove = <button className="remove-btn" onClick={this.removeTodo}>წაშლა</button>
@@ -85,7 +82,6 @@ export default class App extends Component {
           <List arr={this.state.tasksInProgress} func={this.moveTodo} />
           <List arr={this.state.doneTasks} removeBtn={remove} func={this.moveTodo} name="შესრულებული:"/>
         </div>
-        
       </>
     ) 
   }
